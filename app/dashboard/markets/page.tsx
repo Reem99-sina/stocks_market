@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { usePagination } from "@/lib/pagination";
-import { MarketStock, StockWatchlistItem } from "@/types/comapny";
+import { MarketStock } from "@/types/comapny";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AddModelProtfolio } from "@/components/market/addModelPortfolio";

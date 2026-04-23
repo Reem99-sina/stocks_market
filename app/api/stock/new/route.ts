@@ -25,12 +25,9 @@ export async function GET(req: Request) {
     });
 
     return NextResponse.json(data);
-  } catch (err: any) {
-    console.error("API ERROR:", err);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
 
-    return NextResponse.json(
-      { error: err.message || "Server error" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

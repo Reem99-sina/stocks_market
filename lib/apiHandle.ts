@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import axios from "axios";
 
 export async function handleApiRequest<T>(
   requestFn: () => Promise<T>
@@ -9,15 +10,18 @@ export async function handleApiRequest<T>(
     toast.success("Success ✅");
 
     return response;
-  } catch (error: any) {
+  } catch (error: unknown) {
     let message = "Something went wrong";
 
-    if (error?.response) {
+    // Axios error handling
+    if (axios.isAxiosError(error)) {
       message =
         error.response?.data?.error?.message ||
         error.response?.data?.message ||
-        JSON.stringify(error.response?.data);
-    } else if (error?.message) {
+        "Request failed";
+    }
+    // Normal JS error
+    else if (error instanceof Error) {
       message = error.message;
     }
 

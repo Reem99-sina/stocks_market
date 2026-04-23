@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/sidebar";
 import { link } from "@/types/links";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { LogOut } from "lucide-react";
 
 export function AppSidebar({ links }: { links: link[] }) {
   return (
@@ -34,6 +36,15 @@ export function AppSidebar({ links }: { links: link[] }) {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <div className="px-4 pb-2">
+        <button
+          onClick={() => signOut({ callbackUrl: "/login" })}
+          className="flex items-center gap-2 text-red-500 hover:text-red-600 transition"
+        >
+          <LogOut className="w-4 h-4" />
+          Logout
+        </button>
+      </div>
       <SidebarFooter className="p-4 text-sm text-muted-foreground">
         © 2026 Stock Markets
       </SidebarFooter>
